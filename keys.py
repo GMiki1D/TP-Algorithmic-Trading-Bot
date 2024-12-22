@@ -1,4 +1,4 @@
-api = "BWL4qVK6midEaiK7yJ"
-secret = "E2vDMaRU0Fb0WWpVkenN7P5CoVcPU2puxOl5"
+api = ""
+secret = ""
 accountType = "UNIFIED"
 # type is "CONTRACT" or "UNIFIED"
