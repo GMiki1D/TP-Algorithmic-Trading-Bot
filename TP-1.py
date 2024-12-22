@@ -1,13 +1,15 @@
-from keys import api, secret
 from pybit.unified_trading import HTTP
 import pandas as pd
 import ta
 from time import sleep
 
+api = ""
+secret = ""
 
 session = HTTP(
     api_key=api,
-    api_secret=secret
+    api_secret=secret,
+    recv_window=20000
 )
 
 # Config:
