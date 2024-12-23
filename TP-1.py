@@ -9,16 +9,16 @@ secret = ""
 session = HTTP(
     api_key=api,
     api_secret=secret,
-    recv_window=20000
+    recv_window=10000
 )
 
 # Config:
 tp = 0.006  # Take Profit +0.6%
 sl = 0.004  # Stop Loss -0.4%
 timeframe = 5 # 15 minutes
-mode = 0  # 1 - Isolated, 0 - Cross
+mode = 2  # 1 - Isolated, 0 - Cross
 leverage = 20
-qty = 2    # Amount of USDT for one order
+qty = 5    # Amount of USDT for one order
 
 
 # Getting balance on Bybit Derivatrives Asset (in USDT)
@@ -153,8 +153,8 @@ def place_order_market(symbol, side):
                 qty=order_qty,
                 takeProfit=tp_price,
                 stopLoss=sl_price,
-                tpTriggerBy='Market',
-                slTriggerBy='Market'
+                tpTriggerBy='LastPrice',
+                slTriggerBy='LastPrice'
             )
             print(resp)
         except Exception as err:
@@ -172,8 +172,8 @@ def place_order_market(symbol, side):
                 qty=order_qty,
                 takeProfit=tp_price,
                 stopLoss=sl_price,
-                tpTriggerBy='Market',
-                slTriggerBy='Market'
+                tpTriggerBy='LastPrice',
+                slTriggerBy='LastPrice'
             )
             print(resp)
         except Exception as err:
@@ -210,7 +210,7 @@ def williamsR(symbol):
 
 
 
-max_pos = 50    # Max current orders
+max_pos = 10    # Max current orders
 symbols = get_tickers()     # getting all symbols from the Bybit Derivatives
 
 # Infinite loop
@@ -223,6 +223,7 @@ while True:
         print(f'Ami Kb. {int(balance)*390} Magyar forint! :)\n')
         pos = get_positions()
         print(f'Jelenleg {len(pos)} nyitott pozíciód van!: {pos}')
+        print(f'Az összes profitod {get_pnl()} USDT\n')
         if len(pos) < max_pos:
             # Checking every symbol from the symbols list:
             for elem in symbols:
